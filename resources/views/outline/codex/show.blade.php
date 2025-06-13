@@ -3,6 +3,7 @@
 @section('content')
   <h1 class="page-title">Codex Entry Details</h1>
 
+  @fragment('codex-details')
   <div class="codex-details content" id="codex-details-{{ $codex->id }}">
     <h2>{{ $codex->name }}</h2>
 
@@ -17,24 +18,39 @@
     @endif
 
     <div class="codex-actions">
-      <a href="{{ route('outline.codex.index') }}" class="btn">
-        Go back to Full Codex
-      </a>
-      <a href="{{ route('outline.codex.edit', $codex) }}" class="btn">
-        Edit Codex Entry
-      </a>
-      <form 
-        action="{{ route('outline.codex.destroy', $codex) }}" 
-        method="POST"
-        class="codex-delete-form"
-        onsubmit="return confirm('Are you sure you want to delete this codex entry?');"
-      >
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn" title="Delete Codex Entry">
-          Delete Codex Entry
-        </button>
-      </form>
+      @if($isHtmx)
+        <a class="btn"
+          hx-delete="{{ route('outline.codex.destroy', $codex) }}"
+          hx-target=".codex-list"
+          hx-swap="outerHTML"
+          hx-confirm="Are you sure you want to delete this codex entry?"
+        >Delete Entry</a>
+        <a class="btn"
+          hx-get="{{ route('outline.codex.edit', $codex) }}"
+          hx-target="#modal"
+          hx-swap="innerHTML"
+        >Edit Entry</a>
+      @else
+        <a href="{{ route('outline.codex.index') }}" class="btn">
+          Go back to Full Codex
+        </a>
+        <a href="{{ route('outline.codex.edit', $codex) }}" class="btn">
+          Edit Codex Entry
+        </a>
+        <form 
+          action="{{ route('outline.codex.destroy', $codex) }}" 
+          method="POST"
+          class="codex-delete-form"
+          onsubmit="return confirm('Are you sure you want to delete this codex entry?');"
+        >
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn" title="Delete Codex Entry">
+            Delete Codex Entry
+          </button>
+        </form>
+      @endif
     </div>
   </div>
+  @endfragment
 @endsection

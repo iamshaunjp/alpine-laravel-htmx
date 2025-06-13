@@ -3,8 +3,17 @@
 @section('content')
   <h1 class="page-title">Edit Codex Entry</h1>
 
+  @fragment('edit-codex-form')
   <div class="codex-edit-form content" id="codex-edit-{{ $codex->id }}">
-    <form method="POST" action="{{ route('outline.codex.update', $codex) }}">
+    <form 
+      method="POST" 
+      action="{{ route('outline.codex.update', $codex) }}"
+      @if($isHtmx)
+        hx-put="{{ route('outline.codex.update', $codex) }}"
+        hx-target=".codex-list"
+        hx-swap="outerHTML"
+      @endif
+    >
       @csrf
       @method('PUT')
 
@@ -56,4 +65,5 @@
       </div>
     </form>
   </div>
+  @endfragment
 @endsection

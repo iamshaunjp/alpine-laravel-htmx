@@ -15,16 +15,20 @@ class CodexController extends Controller
     $isHtmx = $request->hasHeader('HX-Request');
 
     $codexEntries = Codex::orderBy('type')->orderBy('name')->get()->groupBy('type');
-    return view('outline.codex.index', compact('codexEntries'))
+
+    return view('outline.codex.index', compact('codexEntries', 'isHtmx'))
       ->fragmentIf($isHtmx, 'codex-entry-list');
   }
 
   /**
    * Show the form for creating a new codex entry.
    */
-  public function create()
+  public function create(Request $request)
   {
-    return view('outline.codex.create');
+    $isHtmx = $request->hasHeader('HX-Request');
+
+    return view('outline.codex.create', compact('isHtmx'))
+      ->fragmentIf($isHtmx, 'create-codex-form');
   }
 
   /**
@@ -40,6 +44,15 @@ class CodexController extends Controller
 
     $codex = Codex::create($data);
 
+    $isHtmx = $request->hasHeader('HX-Request');
+
+    if ($isHtmx) {
+        $codexEntries = Codex::orderBy('type')->orderBy('name')->get()->groupBy('type');
+
+        return view('outline.codex.index', compact('codexEntries', 'isHtmx'))
+          ->fragments(['codex-entry-list', 'modal']);
+    }
+
     return redirect()->route('outline.codex.show', $codex)
       ->with('success', 'Codex entry created successfully.');
   }
@@ -47,17 +60,23 @@ class CodexController extends Controller
   /**
    * Display the specified codex entry.
    */
-  public function show(Codex $codex)
+  public function show(Request $request, Codex $codex)
   {
-    return view('outline.codex.show', compact('codex'));
+    $isHtmx = $request->hasHeader('HX-Request');
+
+    return view('outline.codex.show', compact('codex', 'isHtmx'))
+      ->fragmentIf($isHtmx, 'codex-details');
   }
 
   /**
    * Show the form for editing the specified codex entry.
    */
-  public function edit(Codex $codex)
+  public function edit(Request $request, Codex $codex)
   {
-    return view('outline.codex.edit', compact('codex'));
+    $isHtmx = $request->hasHeader('HX-Request');
+
+    return view('outline.codex.edit', compact('codex', 'isHtmx'))
+      ->fragmentIf($isHtmx, 'edit-codex-form');
   }
 
   /**
@@ -73,6 +92,15 @@ class CodexController extends Controller
 
     $codex->update($data);
 
+    $isHtmx = $request->hasHeader('HX-Request');
+
+    if ($isHtmx) {
+        $codexEntries = Codex::orderBy('type')->orderBy('name')->get()->groupBy('type');
+
+        return view('outline.codex.index', compact('codexEntries', 'isHtmx'))
+          ->fragments(['codex-entry-list', 'modal']);
+    }
+
     return redirect()->route('outline.codex.show', $codex)
       ->with('success', 'Codex entry updated successfully.');
   }
@@ -80,9 +108,18 @@ class CodexController extends Controller
   /**
    * Remove the specified codex entry from storage.
    */
-  public function destroy(Codex $codex)
+  public function destroy(Request $request, Codex $codex)
   {
     $codex->delete();
+
+    $isHtmx = $request->hasHeader('HX-Request');
+
+    if ($isHtmx) {
+        $codexEntries = Codex::orderBy('type')->orderBy('name')->get()->groupBy('type');
+
+        return view('outline.codex.index', compact('codexEntries', 'isHtmx'))
+          ->fragments(['codex-entry-list', 'modal']);
+    }
 
     return redirect()->route('outline.codex.index')
       ->with('success', 'Codex entry deleted successfully.');

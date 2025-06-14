@@ -14,18 +14,23 @@
   @stack('head')
 </head>
 
-<body hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'>
+<body hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}' x-init="$store.theme.init()">
   <div class="flex flex-col min-h-screen">
 
     <!-- Header -->
     <header class="site-header">
       <nav>
-        <a href="{{ url('/') }}" class="site-title">
+        <a href="{{ url('/') }}" class="site-title mr-auto">
           Arcitect
         </a>
         <a href="{{ url('/outline') }}">
           Outline Dashboard
         </a>
+        <button
+          class="theme"
+          x-on:click="$store.theme.toggle()" 
+          x-text="$store.theme.dark ? '☀︎' : '⏾'"
+        ></button>
       </nav>
     </header>
 

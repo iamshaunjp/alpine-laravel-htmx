@@ -20,7 +20,7 @@ body {
   @apply bg-indigo-500 text-white px-4 py-2 rounded-sm cursor-pointer;
 }
 .site-header {
-  @apply bg-white py-4 px-8;
+  @apply bg-white py-4 px-8 border-b-1;
 
   nav {
     @apply flex justify-between items-center;
@@ -30,7 +30,7 @@ body {
   @apply font-display text-3xl;
 }
 .site-footer {
-  @apply my-12 pt-8 mx-40 text-gray-500 text-center mt-auto border-t-1;
+  @apply my-12 pt-8 mx-0 text-gray-500 text-center mt-auto border-t-1;
 }
 .page-title {
   @apply py-2 px-8 bg-gray-100 text-gray-400;
@@ -42,7 +42,7 @@ body {
 /* chapter list */
 .chapter-list {
   .chapter {
-    @apply bg-gray-100 px-4 py-4 my-4 relative rounded-sm overflow-hidden;
+    @apply bg-gray-100 px-4 pr-8 py-4 my-4 relative rounded-sm overflow-hidden;
   }
   .chapter-title {
     @apply text-lg font-bold mb-2;
@@ -126,19 +126,7 @@ body {
 
 /* dashboard */
 .dashboard {
-  @apply grid grid-cols-5 gap-4 max-w-7xl mx-auto;  
-}
-
-/* modal */
-.modal-container {
-  @apply hidden;
-}
-.modal-container:has(form, .chapter-details, .codex-details) {
-  @apply block fixed top-0 left-0 w-full h-full;
-  background: rgba(0,0,0,0.5);
-}
-.modal-content:has(form, .chapter-details, .codex-details) {
-  @apply my-12 mx-auto p-12 bg-white rounded-sm max-w-200;
+  @apply grid grid-cols-10 gap-2 mx-auto relative;  
 }
 
 /* sortables */
@@ -147,4 +135,101 @@ body {
 }
 .handle {
   @apply absolute right-0 top-0 h-full flex items-center justify-center cursor-grab px-2 bg-gray-200;
+}
+
+/* codex-nav */
+.content.codex-list,
+.content.chapter-list {
+  @apply pb-0;
+}
+.codex-nav {
+  @apply relative self-stretch bg-white border-r-1;
+}
+
+/* info */
+.info {
+  @apply col-span-3 bg-gray-100 border-l;
+}
+
+/* filter buttons */
+.filters {
+  @apply mb-4 flex gap-2 items-center justify-end;
+
+  button {
+    @apply border-dashed border-1 py-1 px-2 rounded-sm;
+  }
+  button.active {
+    @apply bg-gray-500 text-white border-solid;
+  }
+}
+
+/* theme */
+.theme {
+  @apply ml-4;
+}
+.dark {
+  .info {
+    @apply bg-gray-800 border-gray-700;
+  }
+  body {
+    @apply bg-gray-800;
+  }
+  .site-header {
+    @apply bg-gray-900 border-gray-700 text-gray-300;
+  }
+  .site-title {
+    @apply text-white;
+  }
+  .site-footer {
+    @apply text-gray-200 border-gray-700;
+  }
+  .content {
+    @apply text-gray-200;
+  }
+  .chapter-list {
+    .chapter {
+      @apply bg-gray-700;
+    }
+    .chapter-description {
+      @apply text-gray-300;
+    }
+  }
+  .form-group {
+    input, textarea {
+      @apply bg-gray-700 border-gray-700;
+    }
+    textarea {
+      @apply border-gray-700;
+    }
+    select {
+      @apply border-gray-700 bg-gray-700 ;
+    }
+  }
+  .chapter-details {
+    .chapter-description {
+      @apply text-gray-400;
+    }
+  }
+  .codex-group {
+    @apply border-gray-700;
+
+    h2 {
+      @apply border-gray-600 bg-gray-700;
+    }
+  }
+  .handle {
+    @apply bg-gray-600;
+  }
+  .codex-nav {
+    @apply bg-gray-800 border-gray-700;
+
+    input {
+      @apply border-gray-700 bg-gray-700;
+    }
+  }
+  .filters {
+    button.active {
+      @apply bg-gray-700;
+    }
+  }
 }

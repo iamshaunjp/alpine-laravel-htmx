@@ -4,28 +4,21 @@
   <div class="outline-wrapper">
 
     <div class="dashboard">
-      <div
-        class="col-span-3"
-        hx-get="{{ route('outline.chapters.index') }}"
-        hx-trigger="load"
-        hx-swap="innerHTML"
-      ></div>
-
-      <div
-        class="col-span-2"
+      <div 
+        class="col-span-3 codex-nav"
         hx-get="{{ route('outline.codex.index') }}"
         hx-trigger="load"
         hx-swap="innerHTML"
       ></div>
-    </div>
-
-    <div class="modal-container"
-      hx-get="/modal/empty"
-      hx-target="#modal"
-      hx-swap="innerHTML"
-      hx-trigger="click target:.modal-container"
-    >
-      <div class="modal-content" id="modal"></div>
+      <div
+        class="col-span-4"
+        hx-get="{{ route('outline.chapters.index') }}"
+        hx-trigger="load"
+        hx-swap="innerHTML"
+      ></div>
+      <div class="info">
+        <div class="modal-content" id="modal"></div>
+      </div>
     </div>
 
     <noscript>

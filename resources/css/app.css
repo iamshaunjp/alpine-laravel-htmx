@@ -126,6 +126,8 @@ body {
 
 /* dashboard */
 .dashboard {
+  min-height: calc(100vh - 120px);
+
   @apply grid grid-cols-10 gap-2 mx-auto relative;  
 }
 

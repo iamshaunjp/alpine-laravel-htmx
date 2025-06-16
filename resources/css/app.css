@@ -164,3 +164,77 @@ body {
     @apply bg-gray-500 text-white border-solid;
   }
 }
+
+/* dark theme */
+.dark {
+  .info {
+    @apply bg-gray-800 border-gray-700;
+  }
+  body {
+    @apply bg-gray-800;
+  }
+  .site-header {
+    @apply bg-gray-900 border-gray-700 text-gray-300;
+  }
+  .site-title {
+    @apply text-white;
+  }
+  .site-footer {
+    @apply text-gray-200 border-gray-700;
+  }
+  .content {
+    @apply text-gray-200;
+  }
+  .chapter-list {
+    .chapter {
+      @apply bg-gray-700;
+    }
+    .chapter-description {
+      @apply text-gray-300;
+    }
+  }
+  .form-group {
+    input, textarea {
+      @apply bg-gray-700 border-gray-700;
+    }
+    textarea {
+      @apply border-gray-700;
+    }
+    select {
+      @apply border-gray-700 bg-gray-700 ;
+    }
+  }
+  .chapter-details {
+    .chapter-description {
+      @apply text-gray-400;
+    }
+  }
+  .codex-group {
+    @apply border-gray-700;
+
+    h2 {
+      @apply border-gray-600 bg-gray-700;
+    }
+  }
+  .handle {
+    @apply bg-gray-600;
+  }
+  .codex-nav {
+    @apply bg-gray-800 border-gray-700;
+
+    input {
+      @apply border-gray-700 bg-gray-700;
+    }
+  }
+  .filters {
+    button.active {
+      @apply bg-gray-700;
+    }
+  }
+  .dashboard, footer {
+    @apply bg-gray-800;
+  }
+  footer {
+    @apply mb-0 pb-12
+  }
+}

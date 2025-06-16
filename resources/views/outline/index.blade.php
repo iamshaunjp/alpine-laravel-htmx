@@ -86,6 +86,15 @@
       }
     })
 
+    // alpine store for theme
+    Alpine.store('theme', {
+      dark: true,
+
+      toggle() {
+        this.dark = !this.dark
+      },
+    })
+
   })
 
   document.addEventListener('htmx:afterSwap', (e) => {

@@ -40,6 +40,15 @@
         :class="{ 'active': $store.codex.filter === 'location' }"
       >Locations</button>
     </div>
+
+    <div class="mb-6">
+      <input 
+        type="text"
+        placeholder="Search codex entries..."
+        x-model="$store.codex.search"
+        class="p-2 border rounded w-full"
+      />
+    </div>
   @endif
 
   @php
@@ -55,7 +64,9 @@
         <h2 class="text-lg font-semibold capitalize">{{ $type }}s</h2>
         <ul class="ml-4">
           @foreach ($codexEntries[$type] as $entry)
-            <li class="codex-entry" id="codex-entry-{{ $entry->id }}">
+            <li class="codex-entry" id="codex-entry-{{ $entry->id }}"
+              x-show="$store.codex.matches('{{ $entry->name }}')"
+            >
               <a href="{{ route('outline.codex.show', $entry) }}"
                 @if($isHtmx)
                   hx-get="{{ route('outline.codex.show', $entry) }}"

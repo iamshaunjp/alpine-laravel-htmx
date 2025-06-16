@@ -79,6 +79,11 @@
     // alpine store for codex state
     Alpine.store('codex', {
       filter: 'all',
+      search: '',
+      matches(name) {
+        const term = this.search.trim().toLowerCase()
+        return term === '' || name.toLowerCase().includes(term)
+      }
     })
 
   })

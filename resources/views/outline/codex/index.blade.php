@@ -7,6 +7,7 @@
   <div 
     class="codex-list content" 
     id="codex-list"
+    x-data="{ filter: 'all' }"
   >
   <div class="flex justify-between items-center mb-8">
     <h2 class="text-xl ml-2 font-bold">Codex Entries</h2>
@@ -19,6 +20,29 @@
     </a>
   </div>
 
+  <!-- filter buttons -->
+  @if($isHtmx)
+    <div class="filters">
+      <p>Filter by:</p>
+      <button 
+        x-on:click="filter = 'all'"
+        :class="{ 'active': filter === 'all' }"
+      >All</button>
+      <button 
+        x-on:click="filter = 'character'" 
+        :class="{ 'active': filter === 'character' }"
+      >Characters</button>
+      <button 
+        x-on:click="filter = 'item'"
+        :class="{ 'active': filter === 'item' }"
+      >Items</button>
+      <button 
+        x-on:click="filter = 'location'"
+        :class="{ 'active': filter === 'location' }"
+      >Locations</button>
+    </div>
+  @endif
+
   @php
     $types = ['character', 'item', 'location'];
   @endphp
@@ -27,6 +51,7 @@
     @if(isset($codexEntries[$type]) && $codexEntries[$type]->count())
       <div 
         class="codex-group codex-group-{{ $type }} mb-6"
+        x-show="filter === 'all' || filter === '{{ $type }}'"
       >
         <h2 class="text-lg font-semibold capitalize">{{ $type }}s</h2>
         <ul class="ml-4">

@@ -87,5 +87,14 @@
     })
 
   })
+
+  document.addEventListener('htmx:afterSwap', (e) => {
+    if (e.detail.target.id === 'codex-list') {
+      Alpine.store('codex').search = ''
+    }
+    if (e.detail.target.id === 'modal') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  })
 </script>
 @endpush

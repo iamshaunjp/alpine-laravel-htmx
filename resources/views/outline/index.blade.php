@@ -88,10 +88,11 @@
 
     // alpine store for theme
     Alpine.store('theme', {
-      dark: true,
+      dark: localStorage.getItem('theme') === 'dark',
 
       toggle() {
         this.dark = !this.dark
+        localStorage.setItem('theme', this.dark ? 'dark' : 'light')
       },
     })
 

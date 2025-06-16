@@ -72,4 +72,15 @@
     }
   })
 </script>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+
+    // alpine store for codex state
+    Alpine.store('codex', {
+      filter: 'all',
+    })
+
+  })
+</script>
 @endpush
